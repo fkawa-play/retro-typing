@@ -1,0 +1,22 @@
+CC := gcc
+LIBS := -lncursesw
+OBJS := typing.o main.o logging.o display.o
+PROGRAM := typing
+
+${PROGRAM}: ${OBJS}
+	${CC} -o ${PROGRAM} typing.o main.o logging.o display.o ${LIBS}
+typing.o: typing.h display.h typing.c
+	${CC} -c typing.c ${LIBS}
+main.o: main.c
+	${CC} -c main.c ${LIBS}
+logging.o: logging.h logging.c
+	${CC} -c logging.c ${LIBS}
+display.o: display.c display.h
+	${CC} -c display.c ${LIBS}
+${OBJS}: typing.h
+${OBJS}: logging.h
+${OBJS}: display.h
+
+clean:
+	$(RM) *.o *~
+	$(RM) ${PROGRAM}
