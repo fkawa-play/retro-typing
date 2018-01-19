@@ -81,16 +81,7 @@ To configure typing questions, you should check following procedures:
 
 # How to reset ranking
 
-Please run following command at ``retro-typing/``.
-
-A. Reset the initial values
-
-```
-git checkout ranking/*
-```
-
-B. Remove all ranking data
-    * It is automatically initialized by '0.00'.
+All of ranking data are initialized by '0.00'.
 
 ```
 rm ranking/*.log
@@ -116,9 +107,11 @@ rm ranking/*.log
 # MEMO
 
 * These codes are very ugly.  I'll fix them step by step...
-* I made a framework of typing game by using only following knowledges.
+* I made a framework of typing game by using following knowledges. It's a simple!
     1. File input/output
     1. Structure(struct foo)
     1. Pointer, Pointer array
-    1. getch (ncurses)
+    1. ncurses
+        * getch(), color, viewing
     1. Timer
+    1. Logger
