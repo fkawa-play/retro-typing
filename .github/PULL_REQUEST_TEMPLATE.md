@@ -1,5 +1,5 @@
 <!-- There is a template for PR -->
-<!-- Please fill this template as much as possible -->
+<!-- Please use this template as much as possible -->
 
 ### Overview
 <!-- If this change relates an any issue, please specify the #issue -->
@@ -12,7 +12,7 @@
 <!-- Where are the affected points? -->
 
 ### Requirements for this change
-<!-- Please describe any dependency/constarint/environment values if exists -->
+<!-- Please describe any dependency/constraint/environment values if exists -->
 
 ### Supplement
 <!-- If you have some point of views for reviewing or NOTE, please describe -->

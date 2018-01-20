@@ -1,5 +1,5 @@
 <!-- There is a template for an Issue -->
-<!-- Please fill this template as much as possible -->
+<!-- Please use this template as much as possible -->
 
 ### Overview
 
