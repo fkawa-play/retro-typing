@@ -137,16 +137,17 @@ void initialize(Question *q) {
 
 
 void debug_colors(void) {
+    int bg, fg;
     logger(DEBUG, "colors = %d", COLORS);
     logger(DEBUG, "can_change_color = %d", can_change_color());
-    for(int bg = 1; bg < COLOR_PAIRS; bg++) {
+    for(bg = 1; bg < COLOR_PAIRS; bg++) {
         init_pair(bg, COLOR_BLACK, bg); attrset(COLOR_PAIR(bg));
         printw("##(%3d) ", bg);
         if (bg % 12 == 0) printw("\n");
     }
     wait_key_hit(ENTER_KEY);
     Default();printw("\n--------------\n");
-    for(int fg = 1; fg < COLOR_PAIRS; fg++) {
+    for(fg = 1; fg < COLOR_PAIRS; fg++) {
         init_pair(fg, fg, COLOR_BLACK); attrset(COLOR_PAIR(fg));
         printw("@@(%3d) ", fg);
         if (fg % 12 == 0) printw("\n");

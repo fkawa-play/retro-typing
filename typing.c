@@ -84,6 +84,7 @@ Return   : None
 void load_ranking(char *ranking, double *data) {
     FILE *fp_ranking;
 
+    int i;
     fp_ranking = fopen(ranking, "r");
     if (fp_ranking == NULL) {
         logger(WARNING, "Cannot read %s. Reset ranking...", ranking);
@@ -94,7 +95,7 @@ void load_ranking(char *ranking, double *data) {
             reset_and_exit(EXIT_FAILURE);
         }
     }
-    for(int i = 0; i < NUM_RANKING; i++) fscanf(fp_ranking, "%lf", &data[i]);
+    for(i = 0; i < NUM_RANKING; i++) fscanf(fp_ranking, "%lf", &data[i]);
     logger(INFO, "Loaded %s successfully.", ranking);
     fclose(fp_ranking);
     return;
@@ -107,13 +108,13 @@ Return   : None
 ----------------------------------------------------------*/
 void reset_ranking(char *ranking) {
     FILE *fp_ranking;
-
+    int i;
     fp_ranking = fopen(ranking, "w");
     if (fp_ranking == NULL) {
         logger(ERROR, "Cannot open %s. Exit..", RANKING_TYPE);
         reset_and_exit(EXIT_FAILURE);
     }
-    for(int i = 0; i < NUM_RANKING; i++) fprintf(fp_ranking, "0.00\n");
+    for(i = 0; i < NUM_RANKING; i++) fprintf(fp_ranking, "0.00\n");
     fclose(fp_ranking);
     return;
 }
@@ -629,6 +630,7 @@ Function : Judge stage cleared or not
 Return   : None
 ----------------------------------------------------------*/
 void is_stage_cleared(Score s, Typing t, char *res) {
+    int i;
     int len_char = 14;
     int succeed = FALSE;
     short *cleared = (short *)malloc(sizeof(short) * STAGES);
@@ -678,7 +680,7 @@ void is_stage_cleared(Score s, Typing t, char *res) {
         strncpy(res, FAILED, len_char);
         bRed2();
     }
-    for (int i = 0; i < STAGES; i++) {
+    for (i = 0; i < STAGES; i++) {
         if (flag_succeed[i]) logger(INFO, "Cleared stages:%2d", i + 1);
     }
     flag_completed = is_completed();
@@ -691,10 +693,11 @@ Function : Check all cleared
 Return   : Integer 1(TRUE) or 0(FALSE)
 ----------------------------------------------------------*/
 int is_completed(void) {
+    int i;
     if (flag_completed) return TRUE;
 
     int completed = TRUE;
-    for (int i = 0; i < STAGES; i++) {
+    for (i = 0; i < STAGES; i++) {
         if (flag_succeed[i]) continue;
         completed = FALSE;
         break;

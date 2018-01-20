@@ -732,7 +732,7 @@ Function : Display main menu
 Return   : None
 ----------------------------------------------------------*/
 void print_main_menu(void){
-    int  i;
+    int i;
     int x, y;
     int y_star[STAGES];
     int x_star;
@@ -748,7 +748,7 @@ void print_main_menu(void){
     y_star[0] = co.y + y_offset;
     x_star = 39;
 
-    for (int i = 1; i < STAGES; i++) y_star[i] = y_star[i - 1] + 1;
+    for (i = 1; i < STAGES; i++) y_star[i] = y_star[i - 1] + 1;
 
     mvaddstr(y++, x, "                |.===.        |.===. ");
     mvaddstr(y++, x, "                {}o o{}       {}o o{}");
