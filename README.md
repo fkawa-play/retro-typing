@@ -90,7 +90,8 @@ rm ranking/*.log
 
 # How to Contribute/Debug
 
-* Feel free to pick an issue, push a PR :-p
+* Feel free to pick an issue and push a PR.
+    * You can request your awesome branch into ``develop`` as PR.
 * Logfile is at ``logs/typing.log``.  You can debug with this file like
   following command:
 
