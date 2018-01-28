@@ -236,8 +236,8 @@ void load_questions(Question *q) {
     FILE *fp_ruby;
     FILE *fp_jp;
 
-    char *filename_ruby = (char *)malloc(sizeof(char) * FILENAME);
-    char *filename_jp = (char *)malloc(sizeof(char) * FILENAME);
+    char *filename_ruby = (char *)malloc(sizeof(FILENAME));
+    char *filename_jp = (char *)malloc(sizeof(FILENAME));
 
     if(filename_ruby == NULL || filename_jp == NULL) {
         logger(ERROR, "Cannot allocate memory");
@@ -356,8 +356,8 @@ void typing(Typing *T, Question *Q) {
     int total_len_chars = 0;
 
     // Initialize
-    combo_msg = (char *)malloc(sizeof(char) * MAX_COMBO_MSG);
-    dup = (short *)malloc(sizeof(short) * MAX_QUESTIONS);
+    combo_msg = (char *)malloc(MAX_COMBO_MSG * sizeof(char));
+    dup = (short *)malloc(MAX_QUESTIONS * sizeof(short));
     if (combo_msg == NULL || dup == NULL) {
         logger(CRITICAL, "Cannot allocate memory.. exit.");
         reset_and_exit(EXIT_FAILURE);
