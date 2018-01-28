@@ -14,6 +14,7 @@ Retro typing game written in C.
 * **NOTE**: Only tested following environments:
     1. Ubuntu 16.04.3 LTS
     1. CentOS Linux release 7.4.1708 (Core)
+    1. MaxOS X Yosemite 10.10.5
 
 ## For Ubuntu
 
@@ -31,6 +32,7 @@ Please install following packages:
 sudo yum install -y gcc make ncurses-devel
 ```
 
+
 # How to Play
 
 1. Open terminal app.
@@ -44,11 +46,18 @@ sudo yum install -y gcc make ncurses-devel
    git clone https://github.com/fkawa-play/retro-typing.git
    ```
 1. Compile and generate a binary:
+    * Ubuntu / CentOS
 
-   ```
-   pushd retro-typing/
-   make
-   ```
+       ```
+       pushd retro-typing/
+       make
+       ```
+    * MacOS
+
+       ```
+       pushd retro-typing/
+       make env=mac
+       ```
 1. Run the binary.  Let's play!!!:
 
    ```
