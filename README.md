@@ -2,19 +2,22 @@
 
 Retro typing game written in C.
 
+![sample](https://github.com/fkawa-play/retro-typing/blob/images/images/sample_typing.png)
+
 # Description
 
-* You can play 5 stages for typing.  Let's play!
+* You can play 5 stages for typing.
 * While running this program, please DO NOT EXECUTE ``Ctrl-c``.
     * This program stops immediately.
-* DO NOT remove any files in this repos except `ranking/`.
+* PLEASE DO NOT remove any files in this repos except `ranking/`.
 
 # Requirement
 
-* **NOTE**: Only tested following environments:
-    1. Ubuntu 16.04.3 LTS
-    1. CentOS Linux release 7.4.1708 (Core)
-    1. MaxOS X Yosemite 10.10.5
+**NOTE**: Only tested following environments:
+
+1. Ubuntu 16.04.3 LTS
+1. CentOS Linux release 7.4.1708 (Core)
+1. MaxOS X Yosemite 10.10.5 and macOS High Sierra 10.13.2
 
 ## For Ubuntu
 
@@ -31,7 +34,6 @@ Please install following packages:
 ```
 sudo yum install -y gcc make ncurses-devel
 ```
-
 
 # How to Play
 
