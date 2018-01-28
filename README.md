@@ -2,6 +2,8 @@
 
 Retro typing game written in C.
 
+![sample](https://github.com/fkawa-play/retro-typing/blob/images/images/sample_typing.png)
+
 # Description
 
 * You can play 5 stages for typing.  Let's play!
