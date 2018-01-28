@@ -37,6 +37,8 @@ sudo yum install -y gcc make ncurses-devel
 
 # How to Play
 
+For more detail, please refer [CUSTOMIZE.md](https://github.com/fkawa-play/retro-typing/blob/master/CUSTOMIZE.md)
+
 1. Open terminal app.
     * I strongly recommend to use following constraints. (Otherwise, the layout
       will be off)
@@ -60,10 +62,15 @@ sudo yum install -y gcc make ncurses-devel
        pushd retro-typing/
        make env=mac
        ```
-1. Run the binary.  Let's play!!!:
+1. Run the binary.  Let's play!!!
 
    ```
    ./typing
    ```
 
-For more detail, please refer [CUSTOMIZE.md](https://github.com/fkawa-play/retro-typing/blob/master/CUSTOMIZE.md)
+# How to Contribute
+
+1. Please file an issue.
+1. Fork this repository.
+1. Checkout from **develop** branch and edit.
+1. You can request your awesome branch into **develop** as pull request.

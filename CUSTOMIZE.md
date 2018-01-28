@@ -33,15 +33,14 @@ All of ranking data are initialized by '0.00'.
 rm ranking/*.log
 ```
 
-# How to Contribute/Debug
+# How to Debug
 
-* Feel free to pick an issue and push a PR.
-    * You can request your awesome branch into ``develop`` as PR.
 * Logfile is at ``logs/typing.log``.  You can debug with this file like
   following command:
 
    ```
-   tailf logs/typing.log
+   less -R logs/typing.log
+   (Then, press `Shift + f`)
    ```
 
 # Motivation/MEMO
