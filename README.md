@@ -73,4 +73,8 @@ For more detail, please refer [CUSTOMIZE.md](https://github.com/fkawa-play/retro
 1. Please file an issue.
 1. Fork this repository.
 1. Checkout from **develop** branch and edit.
+
+    ```
+    git checkout -b YOUR_OWESOME_BRANCH remotes/origin/develop
+    ```
 1. You can request your awesome branch into **develop** as pull request.
