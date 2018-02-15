@@ -1,3 +1,13 @@
+cmake_minimum_required(VERSION 3.1)
+project(retro-typing)
+enable_language(CXX)
+set(CMAKE_CXX_STANDARD 11) # C++11
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+
+if(COMMAND cmake_policy)
+  cmake_policy(SET CMP0003 NEW)
+endif(COMMAND cmake_policy)
+
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
@@ -34,9 +44,6 @@ endif()
 find_package(PkgConfig)
 pkg_check_modules(NCURSESW REQUIRED ncursesw)
 include_directories(${NCURSESW_INCLUDE_DIRS} ../)
-
-# Unit tests use c++11
-add_definitions("-Wall -std=c++11")
 
 # Now simply link against gtest or gtest_main as needed. Eg
 add_executable(unittests ../typing.c ../logging.c ../display.c typing_test.cpp)

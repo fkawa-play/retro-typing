@@ -48,9 +48,19 @@ rm ranking/*.log
 This project has unit tests using googletest testing framework.
 You can build and execute unit tests as follows.
 
+**Requirements**: cmake version 3.1 or later.
+
+Install cmake before you build unit tests.
+
+```
+sudo apt install cmake
+```
+
 ```
 cd unittests/
-cmake .
+mkdir build
+cd build
+cmake ..
 make
 ./unittests
 ```
