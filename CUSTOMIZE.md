@@ -46,7 +46,7 @@ rm ranking/*.log
 # How to test
 
 This project has unit tests using googletest testing framework.
-You can build and execute unit tests as follows.
+You can build and execute unit tests as follows. **Note that currently not to support MacOS**.
 
 **Requirements**: cmake version 3.1 or later.
 
