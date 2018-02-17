@@ -57,10 +57,8 @@ sudo apt install cmake
 ```
 
 ```
-cd unittests/
-mkdir build
-cd build
-cmake ..
+cd unittests
+cmake .
 make
 ./unittests
 ```
