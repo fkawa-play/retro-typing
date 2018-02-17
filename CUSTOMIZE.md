@@ -43,6 +43,26 @@ rm ranking/*.log
    (Then, press `Shift + f`)
    ```
 
+# How to test
+
+This project has unit tests using googletest testing framework.
+You can build and execute unit tests as follows. **Note that currently not to support MacOS**.
+
+**Requirements**: cmake version 3.1 or later.
+
+Install cmake before you build unit tests.
+
+```
+sudo apt install cmake
+```
+
+```
+cd unittests
+cmake .
+make
+./unittests
+```
+
 # Motivation/MEMO
 
 * When I was 18 years old, I wanted to create a typing game which is enable to
