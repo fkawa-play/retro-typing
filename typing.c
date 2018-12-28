@@ -633,7 +633,6 @@ void is_stage_cleared(Score s, Typing t, char *res) {
     int i;
     int len_char = 14;
     int succeed = FALSE;
-    short *cleared = (short *)malloc(sizeof(short) * STAGES);
 
     switch(t.stage) {
         case STAGE1:

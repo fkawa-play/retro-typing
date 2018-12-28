@@ -836,7 +836,7 @@ void print_rank(Typing t, Score s) {
     // Judge stage cleared or not
     is_stage_cleared(s, t, cleared);
     len_u_line = strlen(cleared);
-    char *u_line = (char *)malloc(sizeof(char) * len_u_line);
+    char *u_line = (char *)malloc(sizeof(char) * (len_u_line + 1));
     for (i = 0; i < len_u_line; i++) u_line[i] = '=';
     u_line[len_u_line] = '\0';
 
