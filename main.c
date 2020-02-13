@@ -37,7 +37,7 @@ void debug_colors(void);
 void init_colors(void);
 
 
-int main(void) {
+int main(void){
     Typing types;
     Score result;
     Question Q[STAGES];
@@ -46,9 +46,9 @@ int main(void) {
     print_title();
     wait_key_hit(ENTER_KEY);
 
-    while (TRUE) {
+    while(TRUE){
         types.stage = select_stage();
-        switch(types.stage) {
+        switch(types.stage){
             case STAGE1:
                 break;
             case STAGE2:
@@ -69,7 +69,7 @@ int main(void) {
                 print_credit();
                 continue;
             case 's':
-                if (flag_completed) print_aa();
+                if(flag_completed) print_aa();
                 continue;
             case 'q':
                 print_goodbye();
@@ -77,7 +77,7 @@ int main(void) {
             default:
                 continue;
         }
-        if (types.stage == 'q') break;
+        if(types.stage == 'q') break;
         run(&types, Q);
     }
     finalize(Q);
@@ -85,7 +85,7 @@ int main(void) {
 }
 
 
-void initialize(Question *q) {
+void initialize(Question *q){
     int i, j;
 
     time(&seed);
@@ -93,7 +93,7 @@ void initialize(Question *q) {
 
     // Open logfile
     fp_log = fopen(LOGFILE, "a");
-    if (fp_log == NULL) {
+    if(fp_log == NULL){
       printf("Unexpected error. %s not found...", LOGFILE);
       reset_and_exit(EXIT_FAILURE);
     }
@@ -104,11 +104,11 @@ void initialize(Question *q) {
     set_level(DEBUG, OFF);
 
     // Initialize Question
-    for (i = 0; i < STAGES; i++) {
+    for(i = 0; i < STAGES; i++){
         flag_succeed[i] = FALSE;
         q[i].ruby = malloc(sizeof(char) * MAX_QUESTIONS * MAX_QUESTION_LENGTH);
         q[i].jp = malloc(sizeof(char) * MAX_QUESTIONS * MAX_QUESTION_LENGTH);
-        if(q[i].ruby == NULL || q[i].jp == NULL) {
+        if(q[i].ruby == NULL || q[i].jp == NULL){
             logger(ERROR, "Cannot allocate memory");
             reset_and_exit(EXIT_FAILURE);
         }
@@ -121,8 +121,8 @@ void initialize(Question *q) {
 
     load_questions(q);
     //DEBUG - check questions are loaded
-    //for (i = 0; i < STAGES; i++) {
-    //    for (j = 0; j < MAX_QUESTIONS; j++) {
+    //for(i = 0; i < STAGES; i++){
+    //    for(j = 0; j < MAX_QUESTIONS; j++){
     //        logger(DEBUG, "q[%d].ruby[%d] = %s", i, j, q[i].ruby[j]);
     //        logger(DEBUG, "q[%d].jp[%d] = %s", i, j, q[i].jp[j]);
     //    }
@@ -136,30 +136,30 @@ void initialize(Question *q) {
 }
 
 
-void debug_colors(void) {
+void debug_colors(void){
     int bg, fg;
     logger(DEBUG, "colors = %d", COLORS);
     logger(DEBUG, "can_change_color = %d", can_change_color());
-    for(bg = 1; bg < COLOR_PAIRS; bg++) {
+    for(bg = 1; bg < COLOR_PAIRS; bg++){
         init_pair(bg, COLOR_BLACK, bg); attrset(COLOR_PAIR(bg));
         printw("##(%3d) ", bg);
-        if (bg % 12 == 0) printw("\n");
+        if(bg % 12 == 0) printw("\n");
     }
     wait_key_hit(ENTER_KEY);
     Default();printw("\n--------------\n");
-    for(fg = 1; fg < COLOR_PAIRS; fg++) {
+    for(fg = 1; fg < COLOR_PAIRS; fg++){
         init_pair(fg, fg, COLOR_BLACK); attrset(COLOR_PAIR(fg));
         printw("@@(%3d) ", fg);
-        if (fg % 12 == 0) printw("\n");
+        if(fg % 12 == 0) printw("\n");
     }
     return;
 }
 
 
-void finalize(Question *q) {
+void finalize(Question *q){
     int i;
 
-    for (i = 0; i < STAGES; i++) {
+    for(i = 0; i < STAGES; i++){
         free(q[i].ruby);
         free(q[i].jp);
     }
@@ -172,7 +172,7 @@ void finalize(Question *q) {
 }
 
 
-void init_colors(void) {
+void init_colors(void){
     start_color();
     //DEBUG - display all colors with fg/bg
     //debug_colors();

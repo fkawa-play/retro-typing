@@ -55,7 +55,7 @@ Coord get_start_position(int x_offset, int y_offset){
 Function : Return center of coordinate X with specified offset
 Return   : Coord
 ----------------------------------------------------------*/
-int get_x_center(int x_offset) {
+int get_x_center(int x_offset){
     int w, h;
     getmaxyx(stdscr, h, w);
     return (w - x_offset) / 2;
@@ -66,7 +66,7 @@ int get_x_center(int x_offset) {
 Function : Return center of coordinate Y with specified offset
 Return   : Coord
 ----------------------------------------------------------*/
-int get_y_center(int y_offset) {
+int get_y_center(int y_offset){
     int w, h;
     getmaxyx(stdscr, h, w);
     return (h - y_offset) / 2;
@@ -77,7 +77,7 @@ int get_y_center(int y_offset) {
 Function : Display snail animations
 Return   : None
 ----------------------------------------------------------*/
-void snail(Typing t, int len) {
+void snail(Typing t, int len){
     int len_x = 21;
     int len_y = 6;
     int x_offset = 15;
@@ -140,7 +140,7 @@ void snail(Typing t, int len) {
 Function : Display dog animations
 Return   : None
 ----------------------------------------------------------*/
-void dog(Typing t, int len) {
+void dog(Typing t, int len){
     int len_x = 21;
     int len_y = 6;
     int x_offset = 15;
@@ -192,7 +192,7 @@ void dog(Typing t, int len) {
 Function : Display elephant animations
 Return   : None
 ----------------------------------------------------------*/
-void elephant(Typing t, int len) {
+void elephant(Typing t, int len){
     int len_x = 39;
     int len_y = 15;
     int x_offset = 15;
@@ -264,7 +264,7 @@ void elephant(Typing t, int len) {
 Function : Display kangaruu animations
 Return   : None
 ----------------------------------------------------------*/
-void kangaru(Typing t, int len) {
+void kangaru(Typing t, int len){
 
     int len_x = 39;
     int len_y = 15;
@@ -376,7 +376,7 @@ void kangaru(Typing t, int len) {
 Function : Display airship animations
 Return   : None
 ----------------------------------------------------------*/
-void airship(Typing t, int len) {
+void airship(Typing t, int len){
 
     int len_x = 45;
     int len_y = 17;
@@ -471,7 +471,7 @@ void airship(Typing t, int len) {
 Function : Get rank message and comment
 Return   : None
 ----------------------------------------------------------*/
-void get_rank_msg(int rank, char *r, char *c) {
+void get_rank_msg(int rank, char *r, char *c){
     switch(rank){
         case RANK_E:
             strcpy(r, MSG_E); strcpy(c, COMMENT_E);
@@ -515,7 +515,7 @@ void get_rank_msg(int rank, char *r, char *c) {
 Function : Get title for specified stage
 Return   : Top address of Char
 ----------------------------------------------------------*/
-char *get_stage_title(char s) {
+char *get_stage_title(char s){
     switch(s) {
         case STAGE1:
            return TITLE_STAGE1;
@@ -537,7 +537,7 @@ char *get_stage_title(char s) {
 Function : Display credit for this game
 Return   : None
 ----------------------------------------------------------*/
-void print_credit(void) {
+void print_credit(void){
     Coord co = get_start_position(WIDTH_WIN, HEIGHT_WIN);
     int x = co.x + (WIDTH_WIN - MENU_OFFSET) / 2;
     int y = co.y + OFFSET_TYPIST_BANNAR;
@@ -583,9 +583,9 @@ Function : Display animals for specified stage
            TODO(yushiro): Modify suitable method name
 Return   : None
 ----------------------------------------------------------*/
-void print_animal(Typing t, int len) {
+void print_animal(Typing t, int len){
 
-    switch(t.stage) {
+    switch(t.stage){
         case STAGE1:
             snail(t, len);
             break;
@@ -611,7 +611,7 @@ void print_animal(Typing t, int len) {
 Function : Display questions for typing
 Return   : None
 ----------------------------------------------------------*/
-void print_question(char *q_ruby, char *q_jp) {
+void print_question(char *q_ruby, char *q_jp){
     int y_offset = 8;
     Coord co = get_start_position(0, HEIGHT_WIN);
     int y = co.y + y_offset;
@@ -631,7 +631,7 @@ void print_question(char *q_ruby, char *q_jp) {
 Function : Display a bannar of typist
 Return   : None
 ----------------------------------------------------------*/
-void print_typist_bannar(void) {
+void print_typist_bannar(void){
     int x_offset = 52;
     Coord co = get_start_position(x_offset, HEIGHT_WIN);
     int x = co.x;
@@ -652,7 +652,7 @@ void print_typist_bannar(void) {
 Function : Display typist
 Return   : None
 ----------------------------------------------------------*/
-void print_typist(void) {
+void print_typist(void){
     int y_offset = 7;
     int x_offset = 84;
     Coord co = get_start_position(x_offset, y_offset);
@@ -674,7 +674,7 @@ void print_typist(void) {
 }
 
 
-void print_title(void) {
+void print_title(void){
     int y_offset = 4;
     int x_offset = 71;
     Coord co = get_start_position(x_offset, 0);
@@ -710,7 +710,7 @@ void print_goodbye(void){
 
     erase();
     bCyan();
-    for (i = 0; i < 2; i++) {
+    for(i = 0; i < 2; i++) {
         mvaddstr(co.y++, co.x, ":::::::::  :::   ::: ::::::::::");
         mvaddstr(co.y++, co.x, ":+:    :+: :+:   :+: :+:       ");
         mvaddstr(co.y++, co.x, "+:+    +:+  +:+ +:+  +:+       ");
@@ -748,7 +748,7 @@ void print_main_menu(void){
     y_star[0] = co.y + y_offset;
     x_star = 39;
 
-    for (i = 1; i < STAGES; i++) y_star[i] = y_star[i - 1] + 1;
+    for(i = 1; i < STAGES; i++) y_star[i] = y_star[i - 1] + 1;
 
     mvaddstr(y++, x, "                |.===.        |.===. ");
     mvaddstr(y++, x, "                {}o o{}       {}o o{}");
@@ -759,7 +759,7 @@ void print_main_menu(void){
     mvaddstr(y++, x, "|                                                    |");
     mvaddstr(y++, x, "|               STAGES               CLEAR           |");
     mvaddstr(y++, x, "|               ------               -----           |");
-    for (i = 0; i < STAGES; i++) {
+    for(i = 0; i < STAGES; i++) {
         mvprintw(y++, x, "|         %-24s    [ ]            |",
                  get_stage_title('0' + i + 1));
     }
@@ -783,8 +783,8 @@ void print_main_menu(void){
     //flag_succeed[3] = TRUE;
     //flag_succeed[4] = TRUE;
     //flag_completed = TRUE;
-    for (i = 0; i < STAGES; i++) {
-        if (flag_succeed[i]) {
+    for(i = 0; i < STAGES; i++) {
+        if(flag_succeed[i]) {
             bYellow2();
             mvaddstr(y_star[i], x+x_star, "*");
         }
@@ -837,7 +837,7 @@ void print_rank(Typing t, Score s) {
     is_stage_cleared(s, t, cleared);
     len_u_line = strlen(cleared);
     char *u_line = (char *)malloc(sizeof(char) * (len_u_line + 1));
-    for (i = 0; i < len_u_line; i++) u_line[i] = '=';
+    for(i = 0; i < len_u_line; i++) u_line[i] = '=';
     u_line[len_u_line] = '\0';
 
     mvprintw(y++, x, "|                   %14s                   |", cleared);
@@ -939,7 +939,7 @@ void print_aa(void) {
 Function : Display count down before starting typing game
 Return   : None
 ----------------------------------------------------------*/
-void print_countdown(void) {
+void print_countdown(void){
     int x_offset = 18; // Equal to max length of following columns
     int y_offset = 7; // Equal to max length of following rows
     int y;
@@ -1015,7 +1015,7 @@ void print_countdown(void) {
 Function : Display end message after finished typing
 Return   : None
 ----------------------------------------------------------*/
-void print_end(void) {
+void print_end(void){
     int x_offset = 32;
     int y_offset = 7;
     int x, y;
@@ -1046,7 +1046,7 @@ void print_end(void) {
 Function : Display ranking for typing
 Return   : None
 ----------------------------------------------------------*/
-void print_ranking(void) {
+void print_ranking(void){
     int x, y, i;
     double *cpm = (double *)malloc(sizeof(double) * MAX_SENTENSES);
     double *accur = (double *)malloc(sizeof(double) * MAX_SENTENSES);
@@ -1077,9 +1077,9 @@ void print_ranking(void) {
     mvaddstr(y++, x, "|    ------+---------+---------------+------------   |");
 
     for(i = 0; i < NUM_RANKING; i++) {
-        if (i == 0) bBlue();
-        if (i == 1) Green();
-        if (i == 2) Yellow();
+        if(i == 0) bBlue();
+        if(i == 1) Green();
+        if(i == 2) Yellow();
         mvprintw(y++, x,
                  "|    No.%2d |%6.0lf   | %6.2lf [CPM]  |  %6.2lf [%%]   |",
                  i + 1, point[i], cpm[i], accur[i]);

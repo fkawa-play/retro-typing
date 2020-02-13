@@ -53,7 +53,7 @@ int kbhit(void);
 Function : Reset window settings and exit
 Return   : Integer value
 ----------------------------------------------------------*/
-int reset_and_exit(int code) {
+int reset_and_exit(int code){
     echo(); nocbreak(); endwin();
     exit(code);
 }
@@ -65,7 +65,7 @@ Return   : None
 ----------------------------------------------------------*/
 // NOTE(yushiro): This code is copied from http://hatenaclang.blogspot.jp/
 // Thanks to GAMI
-void init_keyboard(void) { tcgetattr(0, &init_tio); }
+void init_keyboard(void){ tcgetattr(0, &init_tio); }
 
 
 /*-----------------------------------------------------------
@@ -74,23 +74,23 @@ Return   : None
 ----------------------------------------------------------*/
 // NOTE(yushiro): This code is copied from http://hatenaclang.blogspot.jp/
 // Thanks to GAMI
-void close_keyboard(void) { tcsetattr(0, TCSANOW, &init_tio); }
+void close_keyboard(void){ tcsetattr(0, TCSANOW, &init_tio); }
 
 
 /*-----------------------------------------------------------
 Function : Load ranking for specified filename
 Return   : None
 ----------------------------------------------------------*/
-void load_ranking(char *ranking, double *data) {
+void load_ranking(char *ranking, double *data){
     FILE *fp_ranking;
 
     int i;
     fp_ranking = fopen(ranking, "r");
-    if (fp_ranking == NULL) {
+    if(fp_ranking == NULL){
         logger(WARNING, "Cannot read %s. Reset ranking...", ranking);
         reset_ranking(ranking);
         fp_ranking = fopen(ranking, "r");
-        if (fp_ranking == NULL) {
+        if(fp_ranking == NULL){
             logger(ERROR, "Cannot read %s. Exit..", ranking);
             reset_and_exit(EXIT_FAILURE);
         }
@@ -106,11 +106,11 @@ void load_ranking(char *ranking, double *data) {
 Function : Reset ranking for specified filename
 Return   : None
 ----------------------------------------------------------*/
-void reset_ranking(char *ranking) {
+void reset_ranking(char *ranking){
     FILE *fp_ranking;
     int i;
     fp_ranking = fopen(ranking, "w");
-    if (fp_ranking == NULL) {
+    if(fp_ranking == NULL){
         logger(ERROR, "Cannot open %s. Exit..", RANKING_TYPE);
         reset_and_exit(EXIT_FAILURE);
     }
@@ -126,7 +126,7 @@ Return   : Integer value, TRUE(1) is hit, FALSE(0) is not hit
 ----------------------------------------------------------*/
 // NOTE(yushiro): This code is copied from http://hatenaclang.blogspot.jp/
 // Thanks to GAMI
-int kbhit() {
+int kbhit(){
     struct termios tio;
     struct timeval tv;
     fd_set rfds;
@@ -150,8 +150,8 @@ int kbhit() {
 Function : Replace from char to integer value like '1' -> 1
 Return   : Integer value
 ----------------------------------------------------------*/
-int ctoi(char c) {
-    switch (c) {
+int ctoi(char c){
+    switch (c){
         case '0': return 0;
         case '1': return 1;
         case '2': return 2;
@@ -171,31 +171,31 @@ int ctoi(char c) {
 Function : Return combo message with current combos
 Return   : None
 ----------------------------------------------------------*/
-void get_combo_msg(char *msg, int combo) {
-    if (combo < 9) {        // 10hits
+void get_combo_msg(char *msg, int combo){
+    if(combo < 9){        // 10hits
         strcpy(msg, "      ");
     }
-    else if (combo < 39) {
+    else if(combo < 39){
         strcpy(msg, "Yeah!!");
         bdOrange();
     }
-    else if (combo < 59) {  // 40hits~
+    else if(combo < 59){  // 40hits~
         strcpy(msg, "Great!!");
         bOrange();
     }
-    else if (combo < 99) {  // 60hits~
+    else if(combo < 99){  // 60hits~
         strcpy(msg, "Awesome!!");
         bMagenta2();
     }
-    else if (combo < 199) { // 100hits~
+    else if(combo < 199){ // 100hits~
         strcpy(msg, "Marvelous!!");
         bBlue();
     }
-    else if (combo < 299) { // 200hits~
+    else if(combo < 299){ // 200hits~
         strcpy(msg, "FEVER!!!!!!");
         bRed2();
     }
-    else { //Over 300hits~!!
+    else{ //Over 300hits~!!
         strcpy(msg, "Miracle!!!!");
         bRed2();
     }
@@ -207,9 +207,9 @@ void get_combo_msg(char *msg, int combo) {
 Function : Wait while specified key is pressed
 Return   : None
 ----------------------------------------------------------*/
-void wait_key_hit(int key) {
-    while(TRUE) {
-        if (getch() == key) break;
+void wait_key_hit(int key){
+    while(TRUE){
+        if(getch() == key) break;
     }
     return;
 }
@@ -219,7 +219,7 @@ void wait_key_hit(int key) {
 Function : Choose stage or config
 Return   : None
 ----------------------------------------------------------*/
-int select_stage(void) {
+int select_stage(void){
     clear();
     print_main_menu();
     return getch();
@@ -230,7 +230,7 @@ int select_stage(void) {
 Function : Load questions for specified stage(level)
 Return   : None
 ----------------------------------------------------------*/
-void load_questions(Question *q) {
+void load_questions(Question *q){
 
     int i, j;
     FILE *fp_ruby;
@@ -239,24 +239,24 @@ void load_questions(Question *q) {
     char *filename_ruby = (char *)malloc(sizeof(char) * FILENAME);
     char *filename_jp = (char *)malloc(sizeof(char) * FILENAME);
 
-    if(filename_ruby == NULL || filename_jp == NULL) {
+    if(filename_ruby == NULL || filename_jp == NULL){
         logger(ERROR, "Cannot allocate memory");
         reset_and_exit(EXIT_FAILURE);
     }
 
     // Read all questions for each stage
-    for (i = 0; i < STAGES; i++) {
+    for(i = 0; i < STAGES; i++){
         snprintf(filename_ruby, FILENAME, QUESTION_AL, i);
         snprintf(filename_jp, FILENAME, QUESTION_JP, i);
 
         fp_ruby = fopen(filename_ruby, "r");
-        if (fp_ruby == NULL) {
+        if(fp_ruby == NULL){
             logger(ERROR, "Cannot read %s and exit..", filename_ruby);
             reset_and_exit(EXIT_FAILURE);
         }
 
         fp_jp = fopen(filename_jp, "r");
-        if ((fp_jp) == NULL) {
+        if((fp_jp) == NULL){
             logger(ERROR, "Cannot read %s and exit..", filename_jp);
             reset_and_exit(EXIT_FAILURE);
         }
@@ -280,7 +280,7 @@ void load_questions(Question *q) {
 Function : Check timeup
 Return   : integer value. TRUE(0): timeup, otherwise FALSE(1)
 ----------------------------------------------------------*/
-int is_timeup(long int t_start) {
+int is_timeup(long int t_start){
     long int t_current = time(&seed);
     return (difftime(t_current, t_start) >= timelimit)? TRUE : FALSE;
 }
@@ -290,7 +290,7 @@ int is_timeup(long int t_start) {
 Function : Return current timelimit [sec]
 Return   : integer value
 ----------------------------------------------------------*/
-int show_t(int t_start) {
+int show_t(int t_start){
     return (int)(timelimit - difftime(time(&seed), t_start));
 }
 
@@ -299,7 +299,7 @@ int show_t(int t_start) {
 Function : Wrapper for typing game
 Return   : None
 ----------------------------------------------------------*/
-void run(Typing *t, Question *q) {
+void run(Typing *t, Question *q){
     print_countdown();
     typing(t, q);
     noecho();
@@ -312,7 +312,7 @@ void run(Typing *t, Question *q) {
 Function : Reset all parameter for a Typing object
 Return   : None
 ----------------------------------------------------------*/
-void reset_typing(Typing *t) {
+void reset_typing(Typing *t){
     t->success = 0;
     t->miss = 0;
     t->u_success = 0;
@@ -329,7 +329,7 @@ void reset_typing(Typing *t) {
 Function : Execute typing game
 Return   : None
 ----------------------------------------------------------*/
-void typing(Typing *T, Question *Q) {
+void typing(Typing *T, Question *Q){
     int i, j, r;
     int combo = 0; // The number of combos
     int pressed; // Pressed key
@@ -358,13 +358,13 @@ void typing(Typing *T, Question *Q) {
     // Initialize
     combo_msg = (char *)malloc(sizeof(char) * MAX_COMBO_MSG);
     dup = (short *)malloc(sizeof(short) * MAX_QUESTIONS);
-    if (combo_msg == NULL || dup == NULL) {
+    if(combo_msg == NULL || dup == NULL){
         logger(CRITICAL, "Cannot allocate memory.. exit.");
         reset_and_exit(EXIT_FAILURE);
     }
     echo();
 
-    for(i = 0; i < MAX_QUESTIONS; i++) {
+    for(i = 0; i < MAX_QUESTIONS; i++){
         dup[i] = FALSE;
         total_len_chars += strlen(Q[s].ruby[i]) - 1;
     }
@@ -375,19 +375,19 @@ void typing(Typing *T, Question *Q) {
     Default();
 
     // Typing loop start
-    for(i = 0; i < MAX_QUESTIONS; i++) {
+    for(i = 0; i < MAX_QUESTIONS; i++){
         T->u_success = 0; T->u_miss = 0;
         clear();
         Yellow();
         mvprintw(y_time, x_time, "TIME:%3d [sec]", show_t(t_start));
-        if (T->combos > VISIBLE_COMBO) {
+        if(T->combos > VISIBLE_COMBO){
             get_combo_msg(combo_msg, combo);
             mvaddstr(y_combo, x_combo_msg, combo_msg);
             Default();
         }
         refresh();
 
-        if (is_timeup(t_start)) {
+        if(is_timeup(t_start)){
             T->time = difftime(time(NULL), t_start);
             break;
         }
@@ -415,25 +415,25 @@ void typing(Typing *T, Question *Q) {
 
         // Start typing!!
         target_key = Q[s].ruby[r];
-        while (*target_key != '\n') {
-            for (j = type_start; j < (type_start + len_chars); j++) {
+        while (*target_key != '\n'){
+            for(j = type_start; j < (type_start + len_chars); j++){
                 mvaddch(y + 1, j, '-');
             }
             move(y, x); // Move to start coordinate for typing
-            while (!kbhit()) {
+            while (!kbhit()){
                 Yellow2();
                 mvprintw(y_time, x_time, "TIME:%3d [sec]", show_t(t_start));
                 Default();
                 move(y, x);
                 refresh();
-                if (is_timeup(t_start)) {
+                if(is_timeup(t_start)){
                     free(combo_msg); free(dup);
                     close_keyboard();
                     return;
                 }
             }
 
-            if (is_timeup(t_start)) {
+            if(is_timeup(t_start)){
                 free(combo_msg); free(dup);
                 close_keyboard();
                 return;
@@ -442,26 +442,26 @@ void typing(Typing *T, Question *Q) {
             pressed = getch();
 
             // Success
-            if (pressed == *target_key) {
+            if(pressed == *target_key){
                 mvaddstr(y_miss, x, "      ");
-                if (is_timeup(t_start)) {
+                if(is_timeup(t_start)){
                     free(combo_msg); free(dup);
                     close_keyboard();
                     return;
                 }
                 mvprintw(y_time, x_time, "TIME:%3d [sec]", show_t(t_start));
                 combo++; T->success++; T->u_success++; T->hits++;
-                if (combo > T->combos) T->combos = combo;
+                if(combo > T->combos) T->combos = combo;
                 Bold();
                 mvprintw(y_combo, x_combo, "%4d Combo", combo);
                 Default();
-                if (T->combos > VISIBLE_COMBO) {
+                if(T->combos > VISIBLE_COMBO){
                     get_combo_msg(combo_msg, combo);
                     mvaddstr(y_combo, x_combo_msg, combo_msg);
                     Default();
                 }
                 Green();
-                if (missed) Red();
+                if(missed) Red();
                 mvaddch(y, x++, *target_key); Default();
                 print_animal(*T, len_chars);
                 refresh();
@@ -469,11 +469,11 @@ void typing(Typing *T, Question *Q) {
                 missed = FALSE;
             }
             // Miss typed
-            else {
+            else{
                 mvaddch(y, x, *target_key);
                 missed = TRUE;
                 mvaddstr(y_combo, x_combo_msg, "             ");
-                if (is_timeup(t_start)) {
+                if(is_timeup(t_start)){
                     free(combo_msg); free(dup);
                     close_keyboard();
                     return;
@@ -487,7 +487,7 @@ void typing(Typing *T, Question *Q) {
                 Yellow();
                 mvprintw(y_time, x_time, "TIME:%3d [sec]", show_t(t_start));
                 Default();
-                for (j = type_start; j < (type_start + len_chars); j++) {
+                for(j = type_start; j < (type_start + len_chars); j++){
                     mvaddch(y+1, j, '-');
                 }
                 move(y, x);
@@ -496,7 +496,7 @@ void typing(Typing *T, Question *Q) {
         }
         mvprintw(y_time, x_time, "TIME:%3d [sec]", show_t(t_start));
         refresh();
-        if (is_timeup(t_start)) {
+        if(is_timeup(t_start)){
             T->time = difftime(time(NULL), t_start);
             free(combo_msg); free(dup);
             close_keyboard();
@@ -514,7 +514,7 @@ void typing(Typing *T, Question *Q) {
 Function : Update existing ranking
 Return   : None
 ----------------------------------------------------------*/
-void update_ranking(Score s) {
+void update_ranking(Score s){
     int i, num;
     short newrec_t = FALSE;
     short newrec_a = FALSE;
@@ -522,9 +522,9 @@ void update_ranking(Score s) {
     short ranking_t = 0;
     short ranking_a = 0;
     short ranking_p = 0;
-    char *msg_type =  {"NEW RECORD!! No.%2d for CPM"};
-    char *msg_accu =  {"NEW RECORD!! No.%2d for accuracy"};
-    char *msg_point = {"NEW RECORD!! No.%2d for point"};
+    char *msg_type = {"NEW RECORD!! No.%2d for CPM"};
+    char *msg_accu = {"NEW RECORD!! No.%2d for accuracy"};
+    char *msg_point ={"NEW RECORD!! No.%2d for point"};
     double *r_type = (double *)malloc(sizeof(double) * NUM_RANKING);
     double *r_accu = (double *)malloc(sizeof(double) * NUM_RANKING);
     double *r_point = (double *)malloc(sizeof(double) * NUM_RANKING);
@@ -535,34 +535,34 @@ void update_ranking(Score s) {
     load_ranking(RANKING_POINT, r_point);
 
     //DEBUG
-    //for (i = 0; i < NUM_RANKING; i++) {
+    //for(i = 0; i < NUM_RANKING; i++){
     //    logger(DEBUG, "CPM[%d] = %3.2lf", i, r_type[i]);
     //    logger(DEBUG, "Accu[%d] = %3.2lf", i, r_accu[i]);
     //    logger(DEBUG, "Point[%d] = %3.2lf", i, r_point[i]);
     //}
 
-    for (num = 0; num < NUM_RANKING; num++) {
-        if (!newrec_t && s.cpm > r_type[num]) {
+    for(num = 0; num < NUM_RANKING; num++){
+        if(!newrec_t && s.cpm > r_type[num]){
             logger(DEBUG, "No.%2d for typing.", num + 1);
-            for(i = NUM_RANKING - 1; i != num; i--) {
+            for(i = NUM_RANKING - 1; i != num; i--){
                 r_type[i] = r_type[i - 1];
             }
             r_type[num] = s.cpm;
             newrec_t = TRUE;
             ranking_t = num + 1;
         }
-        if (!newrec_a && s.accuracy * 100 > r_accu[num]) {
+        if(!newrec_a && s.accuracy * 100 > r_accu[num]){
             logger(DEBUG, "No.%2d for accuracy.", num + 1);
-            for(i = NUM_RANKING - 1; i != num; i--) {
+            for(i = NUM_RANKING - 1; i != num; i--){
                 r_accu[i] = r_accu[i - 1];
             }
             r_accu[num] = s.accuracy * 100;
             newrec_a = TRUE;
             ranking_a = num + 1;
         }
-        if (!newrec_p && s.point > r_point[num]) {
+        if(!newrec_p && s.point > r_point[num]){
             logger(DEBUG, "No.%2d for point.", num + 1);
-            for(i = NUM_RANKING - 1; i != num; i--) {
+            for(i = NUM_RANKING - 1; i != num; i--){
                 r_point[i] = r_point[i - 1];
             }
             r_point[num] = s.point;
@@ -578,41 +578,41 @@ void update_ranking(Score s) {
     int y = co.y + OFFSET_TYPIST_BANNAR + offset_y_newrec;
     int x = co.x + (WIDTH_WIN - MENU_OFFSET) / 2;
 
-    if (newrec_t) {
+    if(newrec_t){
         Blue();
         mvprintw(y++, x + offset_x_newrec, msg_type, ranking_t);
         fp_r_type = fopen(RANKING_TYPE, "w");
-        if (fp_r_type == NULL) {
+        if(fp_r_type == NULL){
             logger(ERROR, "Cannot open %s. Exit..", RANKING_TYPE);
             reset_and_exit(EXIT_FAILURE);
         }
-        for(i = 0; i < NUM_RANKING; i++) {
+        for(i = 0; i < NUM_RANKING; i++){
             fprintf(fp_r_type , "%lf\n", r_type[i]);
         }
         fclose(fp_r_type);
     }
-    if (newrec_a) {
+    if(newrec_a){
         Blue();
         mvprintw(y++, x + offset_x_newrec, msg_accu, ranking_a);
         fp_r_accu = fopen(RANKING_PERCENT, "w");
-        if (fp_r_accu == NULL) {
+        if(fp_r_accu == NULL){
             logger(ERROR, "Cannot open %s. Exit..", RANKING_PERCENT);
             reset_and_exit(EXIT_FAILURE);
         }
-        for(i = 0; i < NUM_RANKING; i++) {
+        for(i = 0; i < NUM_RANKING; i++){
             fprintf(fp_r_accu, "%lf\n", r_accu[i]);
         }
         fclose(fp_r_accu);
     }
-    if (newrec_p) {
+    if(newrec_p){
         Blue();
         mvprintw(y++, x + offset_x_newrec, msg_point, ranking_p);
         fp_r_point = fopen(RANKING_POINT, "w");
-        if (fp_r_point== NULL) {
+        if(fp_r_point== NULL){
             logger(ERROR, "Cannot open %s. Exit..", RANKING_POINT);
             reset_and_exit(EXIT_FAILURE);
         }
-        for(i = 0; i < NUM_RANKING; i++) {
+        for(i = 0; i < NUM_RANKING; i++){
             fprintf(fp_r_point, "%lf\n", r_point[i]);
         }
         fclose(fp_r_point);
@@ -629,42 +629,42 @@ void update_ranking(Score s) {
 Function : Judge stage cleared or not
 Return   : None
 ----------------------------------------------------------*/
-void is_stage_cleared(Score s, Typing t, char *res) {
+void is_stage_cleared(Score s, Typing t, char *res){
     int i;
     int len_char = 14;
     int succeed = FALSE;
 
-    switch(t.stage) {
+    switch(t.stage){
         case STAGE1:
-            if (s.point >= RANK_C) {
+            if(s.point >= RANK_C){
                 strncpy(res, CLEARED, len_char);
                 flag_succeed[ctoi(t.stage) - 1] = TRUE;
                 succeed = TRUE;
             }
             break;
         case STAGE2:
-            if (s.point >= RANK_B) {
+            if(s.point >= RANK_B){
                 strncpy(res, CLEARED, len_char);
                 flag_succeed[ctoi(t.stage) - 1] = TRUE;
                 succeed = TRUE;
             }
             break;
         case STAGE3:
-            if (s.point >= RANK_A) {
+            if(s.point >= RANK_A){
                 strncpy(res, CLEARED, len_char);
                 flag_succeed[ctoi(t.stage) - 1] = TRUE;
                 succeed = TRUE;
             }
             break;
         case STAGE4:
-            if (s.point >= RANK_S && s.accuracy >= 0.97) {
+            if(s.point >= RANK_S && s.accuracy >= 0.97){
                 strncpy(res, CLEARED, len_char);
                 flag_succeed[ctoi(t.stage) - 1] = TRUE;
                 succeed = TRUE;
             }
             break;
         case STAGE5:
-            if (s.point >= RANK_TYPIST && s.accuracy >= 0.98) {
+            if(s.point >= RANK_TYPIST && s.accuracy >= 0.98){
                 strncpy(res, CLEARED, len_char);
                 flag_succeed[ctoi(t.stage) - 1] = TRUE;
                 succeed = TRUE;
@@ -673,14 +673,14 @@ void is_stage_cleared(Score s, Typing t, char *res) {
         default:
             strncpy(res, FAILED, len_char);
     }
-    if (succeed) {
+    if(succeed){
         bBlue();
-    } else {
+    } else{
         strncpy(res, FAILED, len_char);
         bRed2();
     }
-    for (i = 0; i < STAGES; i++) {
-        if (flag_succeed[i]) logger(INFO, "Cleared stages:%2d", i + 1);
+    for(i = 0; i < STAGES; i++){
+        if(flag_succeed[i]) logger(INFO, "Cleared stages:%2d", i + 1);
     }
     flag_completed = is_completed();
     return;
@@ -691,13 +691,13 @@ void is_stage_cleared(Score s, Typing t, char *res) {
 Function : Check all cleared
 Return   : Integer 1(TRUE) or 0(FALSE)
 ----------------------------------------------------------*/
-int is_completed(void) {
+int is_completed(void){
     int i;
-    if (flag_completed) return TRUE;
+    if(flag_completed) return TRUE;
 
     int completed = TRUE;
-    for (i = 0; i < STAGES; i++) {
-        if (flag_succeed[i]) continue;
+    for(i = 0; i < STAGES; i++){
+        if(flag_succeed[i]) continue;
         completed = FALSE;
         break;
     }
@@ -709,7 +709,7 @@ int is_completed(void) {
 Function : Calculate typing result
 Return   : Score
 ----------------------------------------------------------*/
-Score calc_result(Typing *types) {
+Score calc_result(Typing *types){
     int *typ = (int *)malloc(sizeof(int) * NUM_RANKING);
     double *per = (double *)malloc(sizeof(double) * NUM_RANKING);
     Score res;
@@ -724,7 +724,7 @@ Score calc_result(Typing *types) {
 
     res.cpm  = ((double)types->success / (double)types->time) * (double)60;
     types->hits = types->success + types->miss;
-    if (types->hits != 0) {
+    if(types->hits != 0){
         res.accuracy = (double)types->success / (double)types->hits;
     } else{
         res.accuracy = (double)0.00;
@@ -733,7 +733,7 @@ Score calc_result(Typing *types) {
                 types->combos +
                 (double)res.accuracy * (double)BONUS_ACCURACY;
 
-    if (types->combos > maxcombo) maxcombo = types->combos;
+    if(types->combos > maxcombo) maxcombo = types->combos;
 
     print_result(*types, res);
     update_ranking(res);
@@ -749,29 +749,29 @@ Score calc_result(Typing *types) {
 Function : Return rank with specified Score
 Return   : Integer value
 ----------------------------------------------------------*/
-int get_rank(Score s) {
+int get_rank(Score s){
     int point = (int)s.point;
-    if (point < RANK_E) {
+    if(point < RANK_E){
         return RANK_E;
-    } else if (point < RANK_D) {
+    } else if(point < RANK_D){
         return RANK_D;
-    } else if (point < RANK_C) {
+    } else if(point < RANK_C){
         return RANK_C;
-    } else if (point < RANK_B) {
+    } else if(point < RANK_B){
         return RANK_B;
-    } else if (point < RANK_A) {
+    } else if(point < RANK_A){
         return RANK_A;
-    } else if (point < RANK_S) {
+    } else if(point < RANK_S){
         return RANK_S;
-    } else if (point < RANK_TYPIST) {
+    } else if(point < RANK_TYPIST){
         return RANK_TYPIST;
-    } else if (point < RANK_IDATEN) {
+    } else if(point < RANK_IDATEN){
         return RANK_IDATEN;
-    } else if (point < RANK_SHIN) {
+    } else if(point < RANK_SHIN){
         return RANK_SHIN;
-    } else if (point < RANK_ULTIMATE) {
+    } else if(point < RANK_ULTIMATE){
         return RANK_ULTIMATE;
-    } else {
+    } else{
         return RANK_ULTIMATE;
     }
 }
@@ -781,12 +781,12 @@ int get_rank(Score s) {
 Function : Select timelimit for this game
 Return   : Integer value [sec]
 ----------------------------------------------------------*/
-int select_timelimit(void) {
+int select_timelimit(void){
     int i, k, x, y;
     int x_offset_star = 21;
     int key;
     int current = timelimit;
-    short num_value_map[6] = {5, 10, 30, 60, 120, 180};
+    short num_value_map[6] ={5, 10, 30, 60, 120, 180};
     Map time_position_map[6];
 
     erase();
@@ -798,7 +798,7 @@ int select_timelimit(void) {
     x = co.x + (WIDTH_WIN - MENU_OFFSET) / 2;
     // TODO(yushiro): Move into display.c
     mvaddstr(y++, x, "                |.===.        |.===.");
-    mvaddstr(y++, x, "                {}o o{}       {}o o{}");
+    mvaddstr(y++, x, "               {}o o{}      {}o o{}");
     mvaddstr(y++, x, "+------------ooO--(_)--Ooo-ooO--(_)--Ooo-------------+");
     mvprintw(y++, x, "|                                                    |");
     mvprintw(y++, x, "|               P R E F E R E N C E S                |");
@@ -809,7 +809,7 @@ int select_timelimit(void) {
     mvprintw(y++, x, "|                                                    |");
 
     k = y;
-    for (i = 0; i < ((sizeof num_value_map) / sizeof(short)); i++) {
+    for(i = 0; i < ((sizeof num_value_map) / sizeof(short)); i++){
         time_position_map[i].co.y = k++;
         time_position_map[i].co.x = x;
         time_position_map[i].val = num_value_map[i];
@@ -838,7 +838,7 @@ int select_timelimit(void) {
     x += x_offset_star;
     // Map timelimit and position y
     bYellow();
-    switch (timelimit) {
+    switch (timelimit){
         case 5:
             mvaddch(time_position_map[0].co.y, x, '*');
             y = time_position_map[0].co.y;
@@ -866,9 +866,9 @@ int select_timelimit(void) {
     }
     move(y, x);
     // It also works Vim's key bind...
-    while (TRUE) {
+    while (TRUE){
         key = getch();
-        switch (key) {
+        switch (key){
             case 'k':
                 y--;
                 break;
@@ -882,8 +882,8 @@ int select_timelimit(void) {
                 y++;
                 break;
             case ENTER_KEY:
-                for (i = 0; i < ((sizeof num_value_map) / sizeof(short)); i++) {
-                    if (y == time_position_map[i].co.y) {
+                for(i = 0; i < ((sizeof num_value_map) / sizeof(short)); i++){
+                    if(y == time_position_map[i].co.y){
                         Default();
                         return time_position_map[i].val;
                     }
@@ -892,10 +892,10 @@ int select_timelimit(void) {
             default:
                 break;
         }
-        for (i = 0; i <= STAGES; i++) mvaddch(time_position_map[i].co.y, x, ' ');
-        if (y < time_position_map[0].co.y) {
+        for(i = 0; i <= STAGES; i++) mvaddch(time_position_map[i].co.y, x, ' ');
+        if(y < time_position_map[0].co.y){
             y = time_position_map[5].co.y;
-        } else if (y > time_position_map[5].co.y) {
+        } else if(y > time_position_map[5].co.y){
             y = time_position_map[0].co.y;
         }
         mvaddch(y, x, '*');

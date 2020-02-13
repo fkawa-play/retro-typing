@@ -50,7 +50,7 @@ FILE *fp_log;
  === Return value
     nothing
 ------------------------------------------------------------------------------*/
-void logger(enum loglevel code, const char *msg, ...) {
+void logger(enum loglevel code, const char *msg, ...){
   va_list args;
   char time_str[TIME_STR_SIZE];
   time_t t;
@@ -59,19 +59,19 @@ void logger(enum loglevel code, const char *msg, ...) {
   strcpy(time_str, ctime(&t));
   time_str[strlen(time_str) - 6] = '\0';
 
-  if (code >= sizeof(loglevels) / sizeof(loglevels[0])){
+  if(code >= sizeof(loglevels) / sizeof(loglevels[0])){
     puts("CRITICAL: illegal LOG_LEVEL is specified...");
     exit(EXIT_FAILURE);
   }
-  if (loglevels[code].display){
+  if(loglevels[code].display){
     printf("%s:%s:", time_str, loglevels[code].name);
     va_start(args, msg);
     vprintf(msg, args); puts("");
     va_end(args);
   }
-  if (fp_log != NULL){
+  if(fp_log != NULL){
     va_start(args, msg);
-    switch(code) {
+    switch(code){
         case INFO:
            fprintf(fp_log, "\033[36m");
             break;
@@ -92,7 +92,7 @@ void logger(enum loglevel code, const char *msg, ...) {
     fprintf(fp_log, "%s:%s:", time_str, loglevels[code].name);
     vfprintf(fp_log, msg, args); fprintf(fp_log, "\033[0m\n");
     va_end(args);
-  } else {
+  } else{
     puts("CRITICAL: FILE is not opened yet...");
     exit(EXIT_FAILURE);
   }
@@ -107,8 +107,8 @@ void logger(enum loglevel code, const char *msg, ...) {
                                  INFO DEBUG WARN ERROR CRITICAL
     _display_ :: [int] TRUE(1), FALSE(0)
 ------------------------------------------------------------------------------*/
-void set_level(enum loglevel code, int display) {
-  if (code >= sizeof(loglevels) / sizeof(loglevels[0])){
+void set_level(enum loglevel code, int display){
+  if(code >= sizeof(loglevels) / sizeof(loglevels[0])){
     puts("CRITICAL: illegal LOG_LEVEL is specified...");
     exit(EXIT_FAILURE);
   }

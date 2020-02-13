@@ -78,28 +78,28 @@ SOFTWARE.
 
 
 // Struct definitons
-typedef struct {
+typedef struct{
     char (*ruby)[MAX_QUESTION_LENGTH];
     char (*jp)[MAX_QUESTION_LENGTH];
 } Question;
 
-typedef struct {
+typedef struct{
     int x;
     int y;
 } Coord;
 
-typedef struct {
+typedef struct{
     double cpm; // Character per minutes
     double accuracy;
     double point;
 } Score;
 
-typedef struct {
+typedef struct{
     Coord co;
     int val;
 } Map;
 
-typedef struct {
+typedef struct{
     short hits;   // Total number of hits
     short success;   // Total number of succes
     short miss;   // Total number of miss types
