@@ -50,13 +50,9 @@ int main(void) {
         types.stage = select_stage();
         switch(types.stage) {
             case STAGE1:
-                break;
             case STAGE2:
-                break;
             case STAGE3:
-                break;
             case STAGE4:
-                break;
             case STAGE5:
                 break;
             case 'r':
