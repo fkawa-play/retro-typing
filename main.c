@@ -49,7 +49,7 @@ int main(void) {
     while (TRUE) {
         types.stage = select_stage();
         switch(types.stage) {
-		//Fall through for selecting stage 1 to 5
+            // Fall through for selecting stage 1 to 5
             case STAGE1:
             case STAGE2:
             case STAGE3:
